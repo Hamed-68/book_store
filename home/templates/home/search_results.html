@@ -1,0 +1,17 @@
+<!-- <title>نتایج جستجو</title>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    {% if error %}
+        <p class="div-show-search-error">{{ error }}</p>
+    {% else %}
+        <p id="resultsearchheader"><strong>{{ books|length }}</strong> نتیجه برای <strong>"{{ query }}"</strong> یافت شد </p>
+        <ul class="show-search-list">
+            {% for book in books %}
+                <li><a href="{% url 'product:book_detail' book.pk %}">{{ book.title }}</a></li>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+</div>
+{% endblock %} -->

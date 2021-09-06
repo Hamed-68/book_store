@@ -1,0 +1,21 @@
+<title>ورود به حساب کاربری</title>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <link rel="stylesheet" href="/static/signup.css">
+    <div class="container">
+        <h3>لطفا از اینجا وارد شوید</h3>
+        {% if form.errors %}
+            <p>{{ form.errors }}</p>
+        {% endif %}
+            <form class="form-signup" action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <br>
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </form>
+            <p><a href="{% url 'home:signup' %}">ایجاد حساب کاربری</a></p>
+    </div>
+
+
+{% endblock %}
