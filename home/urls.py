@@ -4,6 +4,7 @@ from . import views as home_views
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.urls import reverse_lazy
 
+
 app_name = 'home'
 urlpatterns = [
     path('', TemplateView.as_view(template_name='home/home_page.html'), name='home'),
@@ -19,5 +20,5 @@ urlpatterns = [
         name='password_change_done'),
 # add new address
     path('add_address/', home_views.AddAddress.as_view(), name='add_address'),
-#     path('search/', views.search, name='search'),
+    path('search/', home_views.search, name='search'),
 ]

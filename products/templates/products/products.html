@@ -1,0 +1,16 @@
+<title>محصولات</title>
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="/static/signup.css">
+    <div class="container">
+        <h3>محصولات</h3><br>
+        {% if products_list %}
+            <ul>
+                {% for product in products_list %}
+                    <li><a href="{% url 'products:books' %}">{{ product }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
+{% endblock %}

@@ -4,8 +4,8 @@ from django.conf import settings
 
 
 class User(AbstractUser):  # custom user instead user django
-    address = models.CharField(max_length=200)
-    email = models.EmailField(unique=True)
+    address = models.CharField(max_length=200, verbose_name='آدرس')
+    email = models.EmailField(unique=True, verbose_name='ایمیل')
 
     class Meta:
         db_table = 'auth_user'
@@ -20,7 +20,7 @@ class User(AbstractUser):  # custom user instead user django
 class UserAddress(models.Model):  # users can add extera address
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, verbose_name='آدرس')
 
     def __str__(self):
         return self.name

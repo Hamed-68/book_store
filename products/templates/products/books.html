@@ -1,0 +1,32 @@
+<title>کتابها</title>
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="/static/signup.css">
+    <div class="container">
+        <h3>لیست کتابها</h3>
+        <div>
+            <p>مرتب سازی بر اساس :
+                <a href="?order_by=-price" class="btn btn-outline-primary">گرانترین ها</a>
+                <a href="?order_by=price" class="btn btn-outline-primary">ارزانترین ها</a>
+                <a href="?order_by=-inventory" class="btn btn-outline-primary">موجودی</a>
+                <a href="?order_by=-created_at" class="btn btn-outline-primary">تازه ها</a>
+                <a href="?order_by=name" class="btn btn-outline-primary">الفبا</a>
+            </p>
+        </div>
+        {% if result %}
+            <ul>
+                {% for book in result %}
+                    <li><a href="{% url 'products:book_detail' book.id %}">{{ book }}</a> | <a href="#">افزودن به سبد خرید</a></li>
+                {% endfor %}
+            </ul>
+
+        {% else %}
+            <ul>
+                {% for book in books %}
+                    <li><a href="{% url 'products:book_detail' book.id %}">{{ book }}</a> | <a href="#">افزودن به سبد خرید</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
+{% endblock %}

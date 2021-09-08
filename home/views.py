@@ -1,5 +1,5 @@
-# from django.db.models import Q
-# from product.models import Book
+from django.db.models import Q
+from products.models import Book
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UserForm, UserAddressForm, UserProfile
 from .models import User, UserAddress
@@ -89,19 +89,19 @@ class AddAddress(CreateView):
 
 
 #
-# def search(request):        # search-bar top of pages
-#     error = ""
-#     books = ""
-#     query = ""
-#     if 'q' in request.GET:
-#         query = request.GET['q']
-#         if not query:
-#             error = "لطفا مقدار صحیحی وارد کنید!!!"
-#         else:
-#             books = Book.objects.filter(
-#                 Q(title__icontains=query) | Q(author__icontains=query)
-#             )
-#     else:
-#         error = "درخواست یافت نشد، با عرض پوزش!!!"
-#     context = {'error': error, 'books': books, 'query': query}
-#     return render(request, 'home/search_results.html', context)
+def search(request):        # search-bar top of pages
+    error = ""
+    books = ""
+    query = ""
+    if 'q' in request.GET:
+        query = request.GET['q']
+        if not query:
+            error = "لطفا مقدار صحیحی وارد کنید!!!"
+        else:
+            books = Book.objects.filter(
+                Q(name__icontains=query) | Q(author__icontains=query)
+            )
+    else:
+        error = "درخواست یافت نشد، با عرض پوزش!!!"
+    context = {'error': error, 'books': books, 'query': query}
+    return render(request, 'home/search_results.html', context)

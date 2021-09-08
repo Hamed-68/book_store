@@ -1,6 +1,5 @@
 <title>حساب کاربری</title>
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
 
 {% block content %}
 <link rel="stylesheet" href="/static/signup.css">
@@ -9,7 +8,7 @@
         <h3>پروفایل کاربری</h3>
             <form class="mb-3 row"  method="post">
                 {% csrf_token %}
-                {{ form | crispy }}
+                {{ form }}
                 <input type="submit" class="btn btn-primary" name="" value="ثبت">
             </form>
 
