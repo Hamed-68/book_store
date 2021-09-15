@@ -30,4 +30,3 @@ class UserAddressForm(forms.ModelForm):
     class Meta:
         model = UserAddress
         fields = ['name']
-        help_texts = {'name': 'لطفا آدرس را کامل وارد کنید!'}

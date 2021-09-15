@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # my Apps
     'home.apps.HomeConfig',
     'products.apps.ProductsConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 MIDDLEWARE = [

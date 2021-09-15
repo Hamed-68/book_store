@@ -16,14 +16,14 @@
         {% if result %}
             <ul>
                 {% for book in result %}
-                    <li><a href="{% url 'products:book_detail' book.id %}">{{ book }}</a> | <a href="#">افزودن به سبد خرید</a></li>
+                    <li><a href="{% url 'products:book_detail' book.id %}">{{ book }}</a> | <a href="{% url 'orders:create_order' book.id %}">افزودن به سبد خرید</a></li>
                 {% endfor %}
             </ul>
 
         {% else %}
             <ul>
                 {% for book in books %}
-                    <li><a href="{% url 'products:book_detail' book.id %}">{{ book }}</a> | <a href="#">افزودن به سبد خرید</a></li>
+                    <li><a href="{% url 'products:book_detail' book.id %}">{{ book }}</a> | <a href="{% url 'orders:create_order' book.id %}">افزودن به سبد خرید</a></li>
                 {% endfor %}
             </ul>
         {% endif %}

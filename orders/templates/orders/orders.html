@@ -1,0 +1,27 @@
+<title>تاریخچه سفارشات</title>
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/signup.css">
+<div class="container">
+    <h3>تاریخچه سفارشات</h3><br>
+    {% if user.is_authenticated %}
+    <table class="table table-striped">
+        <tr>
+            <th>سفارش:</th>
+            <th>تاریخ سفارش:</th>
+        </tr>
+            {% if order_list %}
+                {% for order in order_list %}
+                    <tr>
+                        <td><a href="{% url 'orders:orders_detail' %}">{{ order }}</a></td>
+                        <td>{{ order.created }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+
+    </table>
+    {% endif %}
+</div>
+
+{% endblock %}

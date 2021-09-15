@@ -3,6 +3,8 @@
 {% load humanize %}
 {% block content %}
 <link rel="stylesheet" href="/static/signup.css">
+<p>{{ sess }}</p>
+<p>{{ sess_key }}</p>
     <div class="container">
     <h3>جزئیات کتاب</h3><br>
     {% if book %}
@@ -20,8 +22,8 @@
                 <td>{{ book.name }}</td>
                 <td>{{ book.author }}</td>
                 <td>{{ book.genre }}</td>
-                <td>{{ book.price|intcomma }}</td>
-                <td>{{ book.inventory }}</td>
+                <td>{{ book.price|intcomma:False }} ریال</td>
+                <td>{{ book.inventory }} جلد</td>
                 <td>{{ book.created_at|naturaltime }}</td>
 
             </tr>

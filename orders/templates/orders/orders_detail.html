@@ -1,0 +1,42 @@
+<title>تاریخچه سفارشات</title>
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+<link rel="stylesheet" href="/static/signup.css">
+<div class="container">
+    <h3>سبد خرید</h3>
+    <table class="table table-striped">
+        <tr>
+            <th>کالا:</th>
+            <th>تعداد:</th>
+            <th>مبلغ واحد:</th>
+            <th>مبلغ کل</th>
+            <th>وضعیت پرداخت:</th>
+        </tr>
+        {% if orderitem_set %}
+            {% for item in orderitem_set %}
+                <tr>
+                    <td>{{ item.product }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.product.get_price|intcomma:False }}</td>
+                    <td>{{ item.price_order|intcomma:False }}</td>
+                    {% if item.status == False %}
+                        <td>پرداخت نشده</td>
+                    {% else %}
+                        <td>پرداخت شده</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        {% endif %}
+        <tr>
+            <th>کد تخفیف:</th>
+            <th>مبلغ فاکتور:</th>
+        </tr>
+        <tr>
+            <td><input type="text" name="" value=""></td>
+            <td>{{ total_price|intcomma:False }} ریال</td>
+        </tr>
+    </table>
+</div>
+
+{% endblock %}
