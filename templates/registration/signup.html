@@ -1,0 +1,19 @@
+<title>ایجاد حساب کاربری</title>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+<div class="container">
+    <h3>حساب کاربری خود را ایجاد کنید</h3>
+
+        <form class="mb-3 row" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="" class="btn btn-primary" name="button">ثبت نام</button>
+        </form>
+
+</div>
+
+{% endblock %}

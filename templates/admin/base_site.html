@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}مدیریت سایت{% endblock %}
+
+{% block branding %}
+<h1 ><a href="{% url 'admin:index' %}">
+    <img src="{% static 'logo-site.png' %}" alt="LOGO" width="50" height="40" class="d-inline-block align-middle">
+</a>مدیریت سایت</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

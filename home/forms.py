@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserAddress, User
+from .models import Address, User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 
@@ -7,10 +7,7 @@ class UserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email',
-            'address']
-
-
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'mobile_number']
 
 
 class UserProfile(UserChangeForm):
@@ -22,11 +19,11 @@ class UserProfile(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email', 'address']
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'mobile_number']
 
 
-class UserAddressForm(forms.ModelForm):
+class AddressForm(forms.ModelForm):
 
     class Meta:
-        model = UserAddress
-        fields = ['name']
+        model = Address
+        exclude = ('user',)

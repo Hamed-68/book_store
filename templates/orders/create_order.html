@@ -1,0 +1,23 @@
+<title>سبد خرید</title>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+<div class="container">
+    <h3>سبد خرید</h3>
+    {% if obj %}
+        <p>{{ obj }}</p>
+        {% if past_obj_item %}
+            {% for item in past_obj_item %}
+                <p>{{ item.product.name }} | {{ item.product.get_price }}</p>
+            {% endfor %}
+        {% endif %}
+
+        {% if obj_item %}
+            <p>{{ obj_item.product.name }}</p>
+        {% endif %}
+    {% endif %}
+
+</div>
+{% endblock %}

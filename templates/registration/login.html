@@ -1,0 +1,24 @@
+<title>ورود به حساب کاربری</title>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <div class="container">
+        <h3>لطفا از اینجا وارد شوید</h3>
+        {% if form.errors %}
+            <p>{{ form.errors }}</p>
+        {% endif %}
+            <form class="form-signup" action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <br>
+                <button type="submit" class="btn btn-primary">ورود</button>
+            </form>
+            <p><a href="{% url 'home:signup' %}">ایجاد حساب کاربری جدید</a></p>
+            <p><a href="{% url 'password_reset' %}">فراموشی رمز عبور</a></p>
+
+    </div>
+
+
+{% endblock %}

@@ -1,13 +1,14 @@
 from django.db.models import Q
 from products.models import Book
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import UserForm, UserAddressForm, UserProfile
-from .models import User, UserAddress
+from .forms import UserForm, AddressForm, UserProfile
+from .models import User, Address
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, FormView, UpdateView
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404
 
 
 class UserCreateView(CreateView):
@@ -25,31 +26,26 @@ class UserCreateView(CreateView):
             ctx = {'form': form}
             return render(request, self.template_name, ctx)
         else:
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'{username}')
+            email = form.cleaned_data.get('email')
+            messages.success(request, f'{email[:email.index("@")]} عزیز، ثبت نام شما با موفقیت انجام شد!')
             form.save()
         return redirect(self.success_url)
 # +++++++++++++++++++++++++++UPDATE VIEW+++++++++++++++++++++++++++++++++++
 
-
-class ProfileView(UpdateView):
-    template_name = 'registration/profile.html'
-    success_url = '/'
-    form_class = UserProfile
-    def get_object(self):
-        return self.request.user
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 class UserUpdateView(LoginRequiredMixin, View):
     template_name = 'registration/profile.html'
     success_url = reverse_lazy('home:home')
 
     def get(self, request, pk):
-        user = get_object_or_404(User, id=pk)
-        if request.user.is_authenticated:
-            form = UserForm(instance=user)
-            addresses = UserAddress.objects.filter(user=user.id)
-            ctx = {'form': form, 'addresses': addresses}
-            return render(request, self.template_name, ctx)
+        if request.user.pk == pk:
+            user = get_object_or_404(User, id=pk)
+            if request.user.is_authenticated:
+                form = UserForm(instance=user)
+                addresses = Address.objects.filter(user=user.id)
+                ctx = {'form': form, 'addresses': addresses}
+                return render(request, self.template_name, ctx)
+        else:
+            raise Http404("No user matches the id.")
         return render(request, 'registration/login.html')
 
     def post(self, request, pk=None):
@@ -64,17 +60,17 @@ class UserUpdateView(LoginRequiredMixin, View):
 # +++++++++++++++++++++++++++++ADD ANOTHER ADDRESS+++++++++++++++++++++++++++
 
 
-class AddAddress(CreateView):
+class AddAddress(LoginRequiredMixin, CreateView):
     template_name = 'home/add_address.html'
     success_url = reverse_lazy('home:home')
 
     def get(self, request):
-        form = UserAddressForm
+        form = AddressForm
         ctx = {'form': form}
         return render(request, self.template_name, ctx)
 
     def post(self, request):
-        form = UserAddressForm(request.POST)
+        form = AddressForm(request.POST)
         if not form.is_valid():
             ctx = {'form': form}
             return render(request, self.template_name, ctx)

@@ -1,0 +1,26 @@
+<title>حساب کاربری</title>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+{% if user.is_authenticated %}
+    <div class="container">
+        <h3>پروفایل کاربری</h3>
+            <form class="mb-3 row"  method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" class="btn btn-primary" name="" value="ثبت">
+            </form>
+
+    </div>
+    <div class="container">
+        <a href="{% url 'orders:orders' %}" class="btn btn-outline-primary">تاریخچه سفارشات</a>
+        <a href="{% url 'home:add_address' %}" class="btn btn-outline-primary">افزودن آدرس جدید</a>
+        <a href="{% url 'password_change' %}" class="btn btn-outline-primary">تغییر رمز</a>
+
+    </div>
+
+{% endif %}
+{% endblock %}
