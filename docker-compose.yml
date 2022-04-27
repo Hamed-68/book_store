@@ -4,7 +4,7 @@ services:
   db:
     image: postgres:14.1-alpine
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
@@ -26,3 +26,6 @@ services:
       - POSTGRES_PASSWORD=postgres
     depends_on:
       - db
+
+volumes:
+  pgdata:
