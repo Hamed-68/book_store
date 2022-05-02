@@ -1,13 +1,17 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.utils.translation import gettext_lazy as _
 
 from .models import User, Address
 
 
+class AddressAdmin(admin.TabularInline):
+    model = Address
+
+
 @admin.register(User)
-class UserAdmin(DjangoUserAdmin):
+class UserAdmin(admin.ModelAdmin):
     """Define admin model for custom User model with no email field"""
+    inlines = [AddressAdmin]
 
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
@@ -25,5 +29,6 @@ class UserAdmin(DjangoUserAdmin):
     list_display = ('email', 'first_name', 'last_name', 'is_staff', 'phone_number', 'mobile_number')
     search_fields = ('email', 'first_name', 'last_name', 'phone_number', 'mobile_number')
     ordering = ('email',)
+
 
 admin.site.register(Address)

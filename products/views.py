@@ -1,18 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
-from .models import Products, Book
+from .models import Book
 from .forms import BookForm
-
-
-class ProductsListView(ListView):
-    template_name = 'products/products.html'
-    model = Products
 
 
 def book_view(request):
     correct_words = [
         'price', '-price', 'inventory', '-inventory',
-        'created_at', '-created_at', 'name', '-name'
+        'created_at', '-created_at', 'title', '-title'
     ]
     template_name = 'products/books.html'
     if 'order_by' in request.GET and request.GET.get('order_by'):
@@ -34,8 +29,5 @@ class BookDetailView(DetailView):
     def get(self, request, pk):
         book = get_object_or_404(Book, id=pk)
         ctx = {'book': book}
-        ctx['sess'] = self.request.session.keys()
-        ctx['sess_key'] = self.request.session['_auth_user_id']
-        ctx['cook_key'] = self.request.COOKIES.keys()
 
         return render(request, self.template_name, ctx)

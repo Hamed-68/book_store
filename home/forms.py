@@ -1,7 +1,6 @@
 from django import forms
 from .models import Address, User
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-
+from django.contrib.auth.forms import UserCreationForm
 
 class UserForm(UserCreationForm):
 
@@ -9,21 +8,21 @@ class UserForm(UserCreationForm):
         model = User
         fields = ['first_name', 'last_name', 'email', 'phone_number', 'mobile_number']
 
-
-class UserProfile(UserChangeForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        password = self.fields.get('password')
-        if password:
-            password.help_text = None
-
+# ==================== USER PROFILE FORM ================================================
+class UserProfile(forms.ModelForm):
+    
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'phone_number', 'mobile_number']
 
+    def __init__(self, *args, **kwargs):
+        super(UserProfile, self).__init__(*args, **kwargs)
+        user = kwargs['instance']
 
-class AddressForm(forms.ModelForm):
+        # self.fields['address'] = forms.ModelChoiceField(
+        #     queryset=user.address_set, empty_label=None, label='آدرس'
+        # )
 
-    class Meta:
-        model = Address
-        exclude = ('user',)
+# ===================== ADDRESS FORM =====================================================
+
+AddressFormSet = forms.inlineformset_factory(User, Address, exclude=('created_at',), extra=1)

@@ -1,0 +1,14 @@
+#bookpic{
+    padding: 2px;
+    background-color: green;
+    transition: transform .2s; /* Animation */
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+#bookpic:hover{
+    -ms-transform: scale(2.2); /* IE 9 */
+    -webkit-transform: scale(2.2); /* Safari 3-8 */
+    transform: scale(2.2);
+}

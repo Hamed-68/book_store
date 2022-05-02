@@ -36,7 +36,8 @@
                 </div>
             {% else %}
                 <div class="pull-left">
-                    <a href="{% url 'login' %}">ورود</a>
+                    <a href="{% url 'login' %}">ورود</a>  |  
+                    <a href="{% url 'home:signup' %}">ثبت نام</a>
                 </div>
             {% endif %}
             <div class="pull-left">

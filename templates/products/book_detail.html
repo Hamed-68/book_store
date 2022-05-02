@@ -4,9 +4,8 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/signup.css' %}">
-<p>{{ sess }}</p>
-<p>{{ sess_key }}</p>
+<link rel="stylesheet" href="{% static 'products/products.css' %}">
+
     <div class="container">
     <h3>جزئیات کتاب</h3><br>
     {% if book %}
@@ -18,15 +17,23 @@
                 <th>قیمت: </th>
                 <th>موجودی: </th>
                 <th>تاریخ ثبت: </th>
+                <th>تصویر: </th>
+
 
             </tr>
             <tr>
-                <td>{{ book.name }}</td>
+                <td>{{ book.title }}</td>
                 <td>{{ book.author }}</td>
-                <td>{{ book.genre }}</td>
+                <td>
+                    {% for genre in book.genre.all %}
+                        {{ genre }} <br>
+                    {% endfor %}
+                </td>
                 <td>{{ book.price|intcomma:False }} ریال</td>
                 <td>{{ book.inventory }} جلد</td>
                 <td>{{ book.created_at|naturaltime }}</td>
+                <td><img id="bookpic" src="{{ book.image.url }}" alt="{{ book.title }}"></td>
+
 
             </tr>
         </table>

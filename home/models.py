@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 
 class UserManager(BaseUserManager):
@@ -63,6 +64,10 @@ class Address(models.Model):  # users could add extera address
     street = models.CharField(max_length=200, verbose_name=_("خیابان"))
     alley = models.CharField(max_length=200, verbose_name=_("کوچه"), blank=True)
     plaque = models.CharField(max_length=200, verbose_name=_("پلاک"), blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_at']
 
     def __str__(self):
-        return f"{self.state}\ {self.city}\ {self.area}\ {self.street}\ {self.alley}\ {self.plaque}"
+        return f"{self.state} {self.city} {self.area} {self.street} {self.alley} {self.plaque}"

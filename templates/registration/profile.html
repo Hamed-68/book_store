@@ -10,14 +10,15 @@
         <h3>پروفایل کاربری</h3>
             <form class="mb-3 row"  method="post">
                 {% csrf_token %}
-                {{ form|crispy }}
+                {{ user_form|crispy }}
+                <h4>آدرس</h4>
+                {{ address_form|crispy }}
                 <input type="submit" class="btn btn-primary" name="" value="ثبت">
             </form>
 
     </div>
     <div class="container">
         <a href="{% url 'orders:orders' %}" class="btn btn-outline-primary">تاریخچه سفارشات</a>
-        <a href="{% url 'home:add_address' %}" class="btn btn-outline-primary">افزودن آدرس جدید</a>
         <a href="{% url 'password_change' %}" class="btn btn-outline-primary">تغییر رمز</a>
 
     </div>

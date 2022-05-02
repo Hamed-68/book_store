@@ -10,7 +10,9 @@
 
         <form class="mb-3 row" method="post">
             {% csrf_token %}
-            {{ form|crispy }}
+            {{ user_form|crispy }}
+            <h3> آدرس </h3>
+            {{ address_form|crispy }}
             <button type="" class="btn btn-primary" name="button">ثبت نام</button>
         </form>
 

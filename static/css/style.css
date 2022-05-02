@@ -34,7 +34,7 @@ float: right;
 float: right;
     }
 }
-.dropdown-menu, {
+.dropdown-menu {
 float: right;
 }
 .btn-group > .btn,
@@ -160,4 +160,17 @@ margin-right: 0rem !important;
 }
 .nav-link {
 color: #fff !important;
+}
+
+.container {
+    background-color: #00000014;
+    text-align: center;
+    margin-top: .1rem;
+}
+H3 {
+    padding-top: 24px;
+    padding-bottom: 10px;
+}
+.form-signup {
+    padding-bottom: 2rem;
 }
